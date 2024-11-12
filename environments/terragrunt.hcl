@@ -1,12 +1,17 @@
 remote_state {
-  backend = "local"
+  backend = "s3"
   generate = {
-    path      = "backend.tf"
+    path      = "state.tf"
     if_exists = "overwrite_terragrunt"
   }
 
   config = {
-    path = "${path_relative_to_include()}/terraform.tfstate"
+    profile = "default"
+    bucket = "terraform-state-masum"
+    key = "${path_relative_to_include()}/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    dynamodb_table = "terraform-lock-table"
   }
 }
 

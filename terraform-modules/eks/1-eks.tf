@@ -1,13 +1,9 @@
 
-# resource "aws_iam_role_policy_attachment" "eks" {
-#   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-#   role       = aws_iam_role.eks.name
-# }
 
 resource "aws_eks_cluster" "this" {
   name     = "${var.env}-${var.eks_name}"
   version  = var.eks_version
-  role_arn = aws_iam_role.eks.arn
+  role_arn = aws_iam_role.cluster.arn
 
   vpc_config {
     endpoint_private_access = false
