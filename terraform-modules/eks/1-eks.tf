@@ -6,8 +6,9 @@ resource "aws_eks_cluster" "this" {
   role_arn = aws_iam_role.cluster.arn
 
   vpc_config {
-    endpoint_private_access = false
-    endpoint_public_access  = true
+    endpoint_private_access = true
+    endpoint_public_access  = true  # Temporarily enable public access
+
 
     subnet_ids = var.subnet_ids
   }
