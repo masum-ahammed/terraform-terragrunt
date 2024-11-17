@@ -4,7 +4,7 @@ resource "kubernetes_ingress_v1" "keycloak" {
     namespace = "default"
     annotations = merge(var.alb_ingress_annotations, {
       "alb.ingress.kubernetes.io/scheme"            : "internet-facing",
-      "alb.ingress.kubernetes.io/healthcheck-path"  : "/auth",
+      "alb.ingress.kubernetes.io/healthcheck-path"  : "/health",
       "alb.ingress.kubernetes.io/target-type"       : "ip"
     })
   }
@@ -13,7 +13,7 @@ resource "kubernetes_ingress_v1" "keycloak" {
     rule {
       http {
         path {
-          path      = "/auth"
+          path      = "/"
           path_type = "Prefix"
           backend {
             service {
