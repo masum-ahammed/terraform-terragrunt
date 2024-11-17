@@ -16,7 +16,7 @@ resource "helm_release" "aws-load-balancer-controller" {
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
   namespace  = "kube-system"
-  version    = "1.4.1"
+  version    = "1.5.1" # Updated Helm chart version
 
   set {
     name  = "clusterName"
@@ -24,9 +24,20 @@ resource "helm_release" "aws-load-balancer-controller" {
   }
 
   set {
-    name  = "image.tag"
-    value = "v2.4.2"
+    name  = "vpcId"
+    value = var.vpc_id
+  }  
+
+  set {
+    name  = "serviceAccount.create"
+    value = "true"
   }
+
+   set {
+    name  = "image.tag"
+    value = "v2.5.1" # Updated controller image version
+  }
+
 
   set {
     name  = "serviceAccount.name"

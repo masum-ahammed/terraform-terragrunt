@@ -3,6 +3,12 @@ variable "env" {
   type        = string
 }
 
+variable "vpc_id" {
+  description = "Desired VPC Id."
+  type        = string
+}
+
+
 variable "eks_version" {
   description = "Desired Kubernetes master version."
   type        = string
